@@ -10,6 +10,7 @@ export default {
     options.prefix = editor.getConfig().stylePrefix;
     options.posFetcher = canvasView.getElementPos.bind(canvasView);
     options.mousePosFetcher = canvas.getMouseRelativePos;
+    options.zoomFetcher = canvas.getZoomDecimal.bind(canvas);
 
     // Create the resizer for the canvas if not yet created
     if (!canvasResizer || opt.forceNew) {

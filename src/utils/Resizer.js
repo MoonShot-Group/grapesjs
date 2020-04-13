@@ -8,6 +8,7 @@ var defaultOpts = {
   updateTarget: null,
   // Function which gets HTMLElement as an arg and returns it relative position
   ratioDefault: 0,
+  zoomFetcher: null,
   posFetcher: null,
   onStart: null,
   onMove: null,
@@ -151,6 +152,7 @@ class Resizer {
     this.handlers = handlers;
     this.mousePosFetcher = opts.mousePosFetcher;
     this.updateTarget = opts.updateTarget;
+    this.zoomFetcher = opts.zoomFetcher;
     this.posFetcher = opts.posFetcher;
     this.onStart = opts.onStart;
     this.onMove = opts.onMove;
@@ -287,6 +289,8 @@ class Resizer {
    */
   move(e) {
     const onMove = this.onMove;
+    var zoomFetch = this.zoomFetcher;
+    var zoom = zoomFetch ? zoomFetch() : 1;
     var mouseFetch = this.mousePosFetcher;
     var currentPos = mouseFetch
       ? mouseFetch(e)
@@ -297,8 +301,8 @@ class Resizer {
 
     this.currentPos = currentPos;
     this.delta = {
-      x: currentPos.x - this.startPos.x,
-      y: currentPos.y - this.startPos.y
+      x: (currentPos.x - this.startPos.x) / zoom,
+      y: (currentPos.y - this.startPos.y) / zoom
     };
     this.keys = {
       shift: e.shiftKey,
