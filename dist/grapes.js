@@ -23091,7 +23091,7 @@ var timerZoom;
     var em = this.em;
     var key = Object(utils_mixins__WEBPACK_IMPORTED_MODULE_3__["getKeyChar"])(ev);
 
-    if (key === ' ' && em.getZoomDecimal() !== 1) {
+    if (key === ' ' && em.getZoomDecimal() !== 1 && !em.isEditing()) {
       this.preventDefault(ev);
       em.get('Editor').runCommand('core:canvas-move');
     }
@@ -53501,17 +53501,11 @@ function () {
       this.currentPointer = currentPos;
       this.lockedAxis = lockedAxis;
       this.lastScroll = this.getScrollInfo();
-      moveDelta(delta);
-
-      if (this.guidesTarget.length) {
-        var _this$snapGuides = this.snapGuides(deltaPre),
-            newDelta = _this$snapGuides.newDelta,
-            trgX = _this$snapGuides.trgX,
-            trgY = _this$snapGuides.trgY;
-
-        (trgX || trgY) && moveDelta(newDelta);
-      } // In case the mouse button was released outside of the window
-
+      moveDelta(delta); // if (this.guidesTarget.length) {
+      //   const { newDelta, trgX, trgY } = this.snapGuides(deltaPre);
+      //   (trgX || trgY) && moveDelta(newDelta);
+      // }
+      // In case the mouse button was released outside of the window
 
       ev.which === 0 && this.stop(ev);
     }
@@ -54072,7 +54066,7 @@ var defaultOpts = {
   // Resize unit step
   step: 1,
   // Minimum dimension
-  minDim: 32,
+  minDim: 18,
   // Maximum dimension
   maxDim: '',
   // Unit used for height resizing

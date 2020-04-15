@@ -167,10 +167,10 @@ export default class Dragger {
     this.lastScroll = this.getScrollInfo();
     moveDelta(delta);
 
-    if (this.guidesTarget.length) {
-      const { newDelta, trgX, trgY } = this.snapGuides(deltaPre);
-      (trgX || trgY) && moveDelta(newDelta);
-    }
+    // if (this.guidesTarget.length) {
+    //   const { newDelta, trgX, trgY } = this.snapGuides(deltaPre);
+    //   (trgX || trgY) && moveDelta(newDelta);
+    // }
 
     // In case the mouse button was released outside of the window
     ev.which === 0 && this.stop(ev);
