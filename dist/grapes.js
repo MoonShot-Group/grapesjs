@@ -27819,13 +27819,19 @@ var showOffsets;
           var en = !store ? 1 : ''; // this will trigger the final change
 
           if (!onlyHeight) {
-            var bodyw = canvas.getBody().offsetWidth;
-            var width = rect.w < bodyw ? rect.w : bodyw;
-            style[keyWidth] = autoWidth ? 'auto' : "".concat(width).concat(unitWidth);
+            style[keyWidth] = autoWidth ? 'auto' : "".concat(rect.w).concat(unitWidth);
           }
 
           if (!onlyWidth) {
             style[keyHeight] = autoHeight ? 'auto' : "".concat(rect.h).concat(unitHeight);
+          }
+
+          if (store) {
+            style.top = el.offsetTop + rect.t;
+            style.left = el.offsetLeft + rect.l;
+            style.transform = null;
+          } else {
+            style.transform = "translate(".concat(rect.l, "px, ").concat(rect.t, "px)");
           }
 
           modelToStyle.addStyle(_objectSpread({}, style, {

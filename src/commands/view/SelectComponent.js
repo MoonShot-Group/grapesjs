@@ -512,13 +512,19 @@ export default {
           const en = !store ? 1 : ''; // this will trigger the final change
 
           if (!onlyHeight) {
-            const bodyw = canvas.getBody().offsetWidth;
-            const width = rect.w < bodyw ? rect.w : bodyw;
-            style[keyWidth] = autoWidth ? 'auto' : `${width}${unitWidth}`;
+            style[keyWidth] = autoWidth ? 'auto' : `${rect.w}${unitWidth}`;
           }
 
           if (!onlyWidth) {
             style[keyHeight] = autoHeight ? 'auto' : `${rect.h}${unitHeight}`;
+          }
+
+          if (store) {
+            style.top = el.offsetTop + rect.t;
+            style.left = el.offsetLeft + rect.l;
+            style.transform = null;
+          } else {
+            style.transform = `translate(${rect.l}px, ${rect.t}px)`;
           }
 
           modelToStyle.addStyle({ ...style, en }, { avoidStore: !store });
