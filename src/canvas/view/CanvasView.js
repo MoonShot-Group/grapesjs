@@ -92,7 +92,12 @@ export default Backbone.View.extend({
     const { em } = this;
     const key = getKeyChar(ev);
 
-    if (key === ' ' && em.getZoomDecimal() !== 1 && !em.isEditing()) {
+    if (
+      key === ' ' &&
+      em.getZoomDecimal() !== 1 &&
+      !em.isEditing() &&
+      ev.target.nodeName !== 'INPUT'
+    ) {
       this.preventDefault(ev);
       em.get('Editor').runCommand('core:canvas-move');
     }

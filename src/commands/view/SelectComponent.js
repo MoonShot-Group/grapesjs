@@ -522,7 +522,7 @@ export default {
           if (store) {
             style.top = el.offsetTop + rect.t;
             style.left = el.offsetLeft + rect.l;
-            style.transform = null;
+            style.transform = '';
           } else {
             style.transform = `translate(${rect.l}px, ${rect.t}px)`;
           }
