@@ -19,7 +19,7 @@ var defaultOpts = {
   step: 1,
 
   // Minimum dimension
-  minDim: 18,
+  minDim: 1,
 
   // Maximum dimension
   maxDim: '',

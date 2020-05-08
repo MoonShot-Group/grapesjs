@@ -552,8 +552,18 @@ export default () => {
      */
     isInputFocused() {
       const doc = this.getDocument();
+      const frame = this.getFrameEl();
       const toIgnore = ['body', ...this.getConfig().notTextable];
-      const focused = doc && doc.activeElement;
+      const ignoreDoc = !toIgnore.some(item => frame.matches(item));
+      const focused = ignoreDoc
+        ? document.activeElement
+        : doc && doc.activeElement;
+
+      console.log(
+        `ignoreDoc: ${ignoreDoc}`,
+        focused,
+        focused && !toIgnore.some(item => focused.matches(item))
+      );
 
       return focused && !toIgnore.some(item => focused.matches(item));
     },
