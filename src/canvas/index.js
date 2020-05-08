@@ -554,16 +554,10 @@ export default () => {
       const doc = this.getDocument();
       const frame = this.getFrameEl();
       const toIgnore = ['body', ...this.getConfig().notTextable];
-      const ignoreDoc = !toIgnore.some(item => frame.matches(item));
-      const focused = ignoreDoc
-        ? document.activeElement
-        : doc && doc.activeElement;
-
-      console.log(
-        `ignoreDoc: ${ignoreDoc}`,
-        focused,
-        focused && !toIgnore.some(item => focused.matches(item))
-      );
+      const docActive = frame && document.activeElement === frame;
+      const focused = docActive
+        ? doc && doc.activeElement
+        : document.activeElement;
 
       return focused && !toIgnore.some(item => focused.matches(item));
     },

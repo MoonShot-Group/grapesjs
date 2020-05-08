@@ -22617,13 +22617,8 @@ var _window = window,
       var doc = this.getDocument();
       var frame = this.getFrameEl();
       var toIgnore = ['body'].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(this.getConfig().notTextable));
-      var ignoreDoc = !toIgnore.some(function (item) {
-        return frame.matches(item);
-      });
-      var focused = ignoreDoc ? document.activeElement : doc && doc.activeElement;
-      console.log("ignoreDoc: ".concat(ignoreDoc), focused, focused && !toIgnore.some(function (item) {
-        return focused.matches(item);
-      }));
+      var docActive = frame && document.activeElement === frame;
+      var focused = docActive ? doc && doc.activeElement : document.activeElement;
       return focused && !toIgnore.some(function (item) {
         return focused.matches(item);
       });
